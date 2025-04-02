@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="app.component.css">
+</head>
+<body>
+    
+  <div class="main1">
+    <div class="container">
+        <header>
+            <h1>Expense Tracker</h1>
+        </header>
+
+        <section class="add-expense">
+            <h2>Add New Expense {{somefunc()}}</h2>
+            <form id="expense-form">
+              <div class="form-group">
+
+              </div>
+                <label for="description">Expense Description: </label>
+                <input type="text" id="description" placeholder="Enter description" required>
+                
+              <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" placeholder="Enter amount" required>
+              </div>
+                
+
+                <button type="submit" onclick="submit">Add Expense</button>
+            </form>
+        </section>
+
+        <section class="expense-list">
+            <h2>Expense List </h2>
+            <ul id="expense-list">
+                <!-- Expense items will be dynamically added here -->
+            </ul>
+        </section>
+
+        <section class="total">
+            <h3>Total Expense: <span id="total-amount">$0.00</span></h3>
+            <a href="">Show graphs</a>
+        </section>
+    </div>
+  </div>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
