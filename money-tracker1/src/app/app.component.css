@@ -1,7 +1,110 @@
-.graphs {
-    font-size: 24px;
-}
-.container {
-    border-radius: 5%;
-    background-color: burlywood;
-}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body {
+    background-color: #f7fdfd;
+    padding: 20px;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .delete-user {
+    background-color: #fdd;
+    border: 1px solid #faa;
+    color: #a00;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  main h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .username {
+    color: #00bcd4;
+  }
+  
+  .forms-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .form-box {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .form-box h2 {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .create-btn {
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .highlight {
+    color: #00bcd4;
+  }
+  
+  .existing-budgets {
+    margin-top: 40px;
+  }
+  
+  .budget-card {
+    margin-top: 10px;
+    border: 2px solid #f44;
+    padding: 50px;
+    border-radius: 10px;
+    background-color: #fff5f5;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    color: #f44;
+  }
+  

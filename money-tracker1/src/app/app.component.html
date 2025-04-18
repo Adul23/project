@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker</title>
-    <link rel="stylesheet" href="app.component.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HomeBudget</title>
+  <link rel="stylesheet" href="app.component.css"/>
 </head>
 <body>
-    
-  <div class="main1">
-    <div class="container">
-        <header>
-            <h1>Expense Tracker</h1>
-        </header>
-
-        <section class="add-expense">
-            <h2>Add New Expense {{somefunc()}}</h2>
-            <form id="expense-form">
-              <div class="form-group">
-
-              </div>
-                <label for="description">Expense Description: </label>
-                <input type="text" id="description" placeholder="Enter description" required>
-                
-              <div class="form-group">
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" placeholder="Enter amount" required>
-              </div>
-                
-
-                <button type="submit" onclick="submit">Add Expense</button>
-            </form>
-        </section>
-
-        <section class="expense-list">
-            <h2>Expense List </h2>
-            <ul id="expense-list">
-                <!-- Expense items will be dynamically added here -->
-            </ul>
-        </section>
-
-        <section class="total">
-            <h3>Total Expense: <span id="total-amount">$0.00</span></h3>
-            <a href="">Show graphs</a>
-        </section>
+  <header>
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/home.png" alt="Home Icon" />
+      <span>Three Bogatyrs</span>
     </div>
-  </div>
-    <!-- <script src="script.js"></script> -->
+    <div> <button class="delete-user">Delete User 🗑️</button></div>
+  </header>
+
+  <main>
+    <h1>Welcome back, <span class="username">Mario</span></h1> <!--Change to username of the user-->
+    <div class="forms-container">
+      <div class="form-box">
+        <h2>Create Budget</h2>
+        <label>Budget Name</label>
+        <input type="text" placeholder="e.g., Groceries" />
+        <label>Amount</label>
+        <input type="text" placeholder="$350" />
+        <button class="create-btn">Create Budget</button>
+      </div>
+
+      <div class="form-box">
+        <h2>Add New Expense</h2>
+        <label>Expense Name</label>
+        <input type="text" placeholder="e.g., Coffee" />
+        <label>Amount</label>
+        <input type="text" placeholder="e.g., 3.50" />
+        <button class="create-btn">Add Expense</button>
+      </div>
+    </div>
+
+    <section class="existing-budgets">
+      <h2>Existing Budgets</h2>
+      <div class="budget-card">
+        
+        <strong>Gaming</strong>
+        <span>US$1,000.00 Budgeted</span>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
