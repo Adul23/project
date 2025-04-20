@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+import rest_framework
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'mmoney_tracker',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
+AUTH_USER_MODEL = 'users.CustomUser'
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'money_tracker.urls'
 CORS_ALLOW_ALL_ORIGINS: True
@@ -71,8 +75,24 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'money_tracker.wsgi.application'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),      # access token lives for 15 minutes
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),          # refresh token lives for 7 days
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),  
+    'AUTH_COOKIE': 'access_token',    
+    'AUTH_COOKIE_SECURE': True,       
+    'AUTH_COOKIE_HTTP_ONLY': True,
+    'AUTH_COOKIE_SAMESITE': 'Strict',
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
