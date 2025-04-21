@@ -1,0 +1,12 @@
+<h2>Dashboard</h2>
+
+<div *ngIf="expenses.length === 0">No expenses yet.</div>
+
+<ul>
+  <li *ngFor="let expense of expenses">
+    {{ expense.amount }} – {{ expense.description }}
+  </li>
+</ul>
+<a routerLink="/add-expense">+ Add new expense</a>
+<button (click)="onLogout()">Logout</button>
+

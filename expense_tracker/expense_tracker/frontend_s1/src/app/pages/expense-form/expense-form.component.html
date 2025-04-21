@@ -1,0 +1,26 @@
+<h2>Add Expense</h2>
+
+<div *ngIf="error" style="color: red;">{{ error }}</div>
+<div *ngIf="success" style="color: green;">{{ success }}</div>
+
+<form (ngSubmit)="onSubmit()">
+  <label>Amount:</label><br />
+  <input type="number" [(ngModel)]="amount" name="amount" required /><br /><br />
+
+  <label>Description:</label><br />
+  <input type="text" [(ngModel)]="description" name="description" required /><br /><br />
+
+  <label>Category:</label><br />
+  <select [(ngModel)]="category" name="category" required>
+  <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+  </select><br /><br />
+
+  <label>Currency:</label><br />
+  <select [(ngModel)]="currency" name="currency" required>
+  <option *ngFor="let cur of currencies" [value]="cur.id">
+    {{ cur.code }} - {{ cur.name }}
+  </option>
+  </select><br /><br />
+
+  <button type="submit">Create Expense</button>
+</form>
