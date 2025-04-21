@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class ExpenseService {
   private baseUrl = 'http://127.0.0.1:8000/api/expenses/';
-
+  private baseUrlget = 'http://127.0.0.1:8000/api/categories/';
   constructor(private http: HttpClient) {}
 
   createExpense(data: any): Observable<any> {
     return this.http.post(this.baseUrl, data);
   }
 
-  getExpenses(): Observable<any> {
-    return this.http.get(this.baseUrl);
+  getExpenses(selected_id: any): Observable<any> {
+    return this.http.get(this.baseUrlget + selected_id + "/expenses/");
   }
 }

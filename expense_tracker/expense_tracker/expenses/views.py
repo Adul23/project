@@ -76,3 +76,19 @@ class CurrencyListCreateView(generics.ListCreateAPIView):
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
     permission_classes = [IsAuthenticated]
+
+
+@api_view(['GET', 'POST'])   
+@permission_classes([IsAuthenticated]) 
+def listExpensesbyCategory(request, category_id):
+    if request.method == 'GET':
+        expenses = Expense.objects.filter(category=category_id)
+        serializer = ExpenseSerializer(expenses, many=True)
+        return Response(serializer.data) 
+    if request.method == 'POST':
+        expenses = Expense.objects.all()
+        serializer = ExpenseSerializer(data=request.data)
+        if serializer.is_valid():
+            expense = serializer.save()
+            return Response(ExpenseSerializer(expense).data, status=201)
+        return Response(serializer.errors, status=400)

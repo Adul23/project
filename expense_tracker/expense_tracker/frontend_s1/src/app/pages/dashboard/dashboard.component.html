@@ -1,4 +1,4 @@
-<h2>Dashboard</h2>
+<!-- <h2>Dashboard</h2>
 
 <div *ngIf="expenses.length === 0">No expenses yet.</div>
 
@@ -6,7 +6,78 @@
   <li *ngFor="let expense of expenses">
     {{ expense.amount }} – {{ expense.description }}
   </li>
-</ul>
-<a routerLink="/add-expense">+ Add new expense</a>
-<button (click)="onLogout()">Logout</button>
+</ul> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HomeBudget</title>
+  <link rel="stylesheet" href="dashboard.component.css"/>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/home.png" alt="Home Icon" />
+      <span class="white">Three Bogatyrs</span>
+    </div>
+    <div> 
+      <button (click)="onLogout()">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <h1>Welcome back, <span class="username">{{username}}</span></h1> <!--Change to username of the user-->
+    <div class="forms-container">
+      <div class="form-box">
+        <h2>Create Budget</h2>
+        <label>Budget Name</label>
+        <input type="number" placeholder="e.g., Groceries"  [(ngModel)]="name" name="name" required /><br /><br />
+
+        
+        <button class="create-btn" (click)="onCreate()">Create Budget</button>
+      </div>
+
+      <div class="form-box">
+        <h2>Add New Expense</h2>
+        <label>Expense Name</label>
+        <input type="text" placeholder="e.g., Coffee" />
+        <label>Amount</label>
+        <input type="text" placeholder="e.g., 3.50" />
+        <button class="create-btn">Add Expense</button>
+      </div>
+    </div>
+    <div *ngIf="expenses.length === 0">No expenses yet.</div>
+
+    
+    <section class="existing-budgets">
+      <ul>
+        <h2 class="white">Existing Budgets</h2>
+        <div class="budget-container" >
+          <div class="budget-card" *ngFor="let category of categories" >
+            
+            <a routerLink="/add-expense" (click)="selectCategory(category.id)" [queryParams]="{ categoryId: selected_category }" > 
+              <div> <strong>{{category.name}}</strong></div>
+            </a>
+            
+            
+            <!-- <span>US$1,000.00 Budgeted</span> -->
+          </div>
+          
+        </div>
+      </ul> 
+
+
+      
+      
+    </section>
+  </main>
+</body>
+</html>
+
+
+
+
 

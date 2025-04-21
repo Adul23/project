@@ -5,7 +5,8 @@ from .views import (
     ExpenseListCreateAPIView,
     ExpenseDetailAPIView,
     CategoryListCreateView,
-    CurrencyListCreateView
+    CurrencyListCreateView,
+    listExpensesbyCategory
 )
 
 urlpatterns = [
@@ -15,4 +16,6 @@ urlpatterns = [
     path('expenses/<int:pk>/', ExpenseDetailAPIView.as_view(), name='expense-detail'),
     path('categories/', CategoryListCreateView.as_view(), name='category-list-create'),
     path('currencies/', CurrencyListCreateView.as_view(), name='currency-list-create'),
+    path('categories/<int:category_id>/expenses/', listExpensesbyCategory, name='budget-expenses'),
+
 ]

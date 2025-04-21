@@ -32,7 +32,7 @@ export class RegisterComponent {
       email: this.email,
       password: this.password
     };
-
+    this.authService.setUsername(this.username);
     this.authService.register(data).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => {

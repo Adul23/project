@@ -23,6 +23,7 @@ export class LoginComponent {
     const data = { username: this.username, password: this.password };
     this.authService.login(data).subscribe({
       next: (res: any) => {
+        this.authService.setUsername(this.username);
         this.authService.saveToken(res.access);
         this.router.navigate(['/dashboard']);
       },

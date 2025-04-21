@@ -7,7 +7,7 @@ import {Observable, tap} from 'rxjs';
 })
 export class AuthService {
   private baseUrl = 'http://127.0.0.1:8000/api';
-
+  private username:string = '';
   constructor(private http: HttpClient) {}
 
   login(data: any): Observable<any> {
@@ -42,5 +42,13 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  setUsername(username: string) {
+    this.username = username;
+  }
+
+  getUsername(): string {
+    return this.username;
   }
 }
