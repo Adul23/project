@@ -55,7 +55,6 @@ export class DashboardComponent implements OnInit {
   }
   selectCategory(categoryID: number){
     this.selected_category = categoryID;
-    console.log(this.selected_category);
   }
   getSelectedCategory(){
     return this.selected_category;

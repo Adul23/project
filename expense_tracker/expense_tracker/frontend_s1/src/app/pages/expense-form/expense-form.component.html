@@ -1,50 +1,66 @@
 <div *ngIf="error" style="color: red;">{{ error }}</div>
 <div *ngIf="success" style="color: green;">{{ success }}</div>
-
-<div class="form-box">
-  <h2>Add New Expense</h2>
-
-  <form (ngSubmit)="onSubmit()">
-    <label>Amount</label>
-    <input
-      type="number"
-      [(ngModel)]="amount"
-      name="amount"
-      placeholder="e.g., 3.50"
-      required
-    />
-
-    <label>Expense Name</label>
-    <input
-      type="text"
-      [(ngModel)]="description"
-      name="description"
-      placeholder="e.g., Coffee"
-      required
-    />
-
-    <label>Category</label>
-    <select [(ngModel)]="category" name="category" required>
-      <option *ngFor="let cat of categories" [value]="cat.id">
-        {{ cat.name }}
-      </option>
-    </select>
-
-    <label>Currency</label>
-    <select [(ngModel)]="currency" name="currency" required>
-      <option *ngFor="let cur of currencies" [value]="cur.id">
-        {{ cur.code }} - {{ cur.name }}
-      </option>
-    </select>
-
-    <button class="create-btn" type="submit">Add Expense</button>
-  </form>
+<div>
+  <div class="form-box">
+    <h2>Add New Expense</h2>
+  
+    <form (ngSubmit)="onSubmit()">
+      <label>Amount</label>
+      <input
+        type="number"
+        [(ngModel)]="amount"
+        name="amount"
+        placeholder="e.g., 3.50"
+        required
+      />
+  
+      <label>Expense Name</label>
+      <input
+        type="text"
+        [(ngModel)]="description"
+        name="description"
+        placeholder="e.g., Coffee"
+        required
+      />
+  
+      <label>Category</label>
+      <select [(ngModel)]="category" name="category" required>
+        <option *ngFor="let cat of categories" [value]="cat.id">
+          {{ cat.name }}
+        </option>
+      </select>
+  
+      <label>Currency</label>
+      <select [(ngModel)]="currency" name="currency" required>
+        <option *ngFor="let cur of currencies" [value]="cur.id">
+          {{ cur.code }} - {{ cur.name }}
+        </option>
+      </select>
+  
+      <button class="create-btn" type="submit">Add Expense</button>
+    </form>
+  </div>
+  
+  <div>
+    <ul class="white">
+      <li *ngFor="let expense of expenses">
+        {{ expense.amount }} – {{ expense.description }}
+        
+      </li>
+    </ul>
+  
+  
+  </div>
 </div>
 
+<div style="display: block;">
+  <canvasjs-chart
+  [options]="chartOptions"
+  style="height: 300px; width: 100%;"
+></canvasjs-chart>
+
+
+</div>
 <div>
-  <ul class="white">
-    <li *ngFor="let expense of expenses">
-      {{ expense.amount }} – {{ expense.description }}
-    </li>
-  </ul>
+  <button style="width: 100px; height: 100px" (click)="generateChartData()">Refresh graph button</button>
 </div>

@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { CurrencyService } from '../../services/currency.service';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration, ChartType, ChartData } from 'chart.js';
+import { ViewChild } from '@angular/core';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @Component({
   standalone: false,
@@ -21,6 +25,7 @@ export class ExpenseFormComponent implements OnInit {
   categories: any[] = [];
   currencies: any[] = [];
   expenses: any[] = [];
+  chartOptions: any;
   selectedCategory: number = 0;
   constructor(
     private expenseService: ExpenseService,
@@ -28,6 +33,7 @@ export class ExpenseFormComponent implements OnInit {
     private currencyService: CurrencyService,
     private router: Router,
     private route: ActivatedRoute, 
+     
   ) {}
 
   ngOnInit() {
@@ -35,7 +41,6 @@ export class ExpenseFormComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['categoryId']) {
         this.selectedCategory = params['categoryId'];
-        console.log('Selected category:', this.selectedCategory);  // Log the category ID
       } else {
         console.error('Category ID is missing');
       }
@@ -56,18 +61,12 @@ export class ExpenseFormComponent implements OnInit {
       this.expenseService.getExpenses(this.selectedCategory).subscribe({
         next: (res) => {
           this.expenses = res;
+          console.log(this.expenses);
+          this.generateChartData();
         },
         error: (err) => console.error('Failed to load expenses:', err)
       });
     }
-    // this.expenseService.getExpenses(this.selectedCategory).subscribe({
-    //   next: (res) => {
-    //     this.expenses = res;
-    //     console.log('Expenses:', res);
-    //   }
-    //     ,
-    //   error: (err) => console.error('Failed to load currencies:', err)
-    // });
   }
 
   onSubmit() {
@@ -89,4 +88,33 @@ export class ExpenseFormComponent implements OnInit {
       }
     });
   }
+  
+  
+	generateChartData() {
+    const dps = this.expenses.map((expense: any) => ({
+      x: new Date(expense.date),
+      y: parseFloat(expense.amount)
+      
+    }));
+    this.chartOptions = {
+      zoomEnabled: true,
+      exportEnabled: true,
+      theme: "light2",
+      title: {
+        text: "Expenses Over Time"
+      },
+      axisX: {
+        title: "Date",
+        valueFormatString: "DD MMM YYYY"
+      },
+      axisY: {
+        title: "Amount"
+      },
+      data: [{
+        type: "line",
+        dataPoints: dps
+      }]
+    };
+  }
+  
 }
