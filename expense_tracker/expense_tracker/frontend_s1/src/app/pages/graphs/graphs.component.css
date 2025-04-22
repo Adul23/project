@@ -1,0 +1,20 @@
+.savings, .expenditure, .income {
+    margin: 10px;
+  }
+  
+  .mat-expansion-panel-header {
+    background-color: #f1f1f1;
+    font-weight: bold;
+  }
+  
+  .mat-expansion-panel-body {
+    background-color: #fff;
+    padding: 10px;
+  }
+  p-chart{
+    color:#f1f1f1;
+  }
+  :host ::ng-deep .chart-container {
+    height: 400px !important;
+    width: 800px !important;
+}
