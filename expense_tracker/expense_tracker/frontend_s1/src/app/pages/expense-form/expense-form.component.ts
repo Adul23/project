@@ -91,6 +91,9 @@ export class ExpenseFormComponent implements OnInit {
   
   
 	generateChartData() {
+    const totalAmount = this.expenses.reduce((sum: number, expense: any) => {
+      return sum + parseFloat(expense.amount);
+    }, 0);
     const dps = this.expenses.map((expense: any) => ({
       x: new Date(expense.date),
       y: parseFloat(expense.amount)
@@ -108,7 +111,7 @@ export class ExpenseFormComponent implements OnInit {
         valueFormatString: "DD MMM YYYY"
       },
       axisY: {
-        title: "Amount"
+        title: "Amount " + totalAmount
       },
       data: [{
         type: "line",
@@ -116,5 +119,20 @@ export class ExpenseFormComponent implements OnInit {
       }]
     };
   }
+  removeExpense(index: number): void {
   
+    this.expenseService.deleteExpense(index, this.selectedCategory).subscribe(() => {
+      this.expenses = this.expenses.filter(exp => exp.id !== index);
+      console.log(this.expenses);
+    });
+      this.expenseService.getExpenses(this.selectedCategory).subscribe({
+        next: (res) => {
+          this.expenses = res;
+          console.log(this.expenses);
+          this.generateChartData();
+        },
+        error: (err) => console.error('Failed to load expenses:', err)
+      });
+    this.generateChartData();
+  }
 }

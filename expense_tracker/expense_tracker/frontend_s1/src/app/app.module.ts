@@ -11,22 +11,24 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { ExpenseFormComponent } from './pages/expense-form/expense-form.component';
-import { BaseChartDirective } from 'ng2-charts';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { SidebarComponent } from './pages/sidebar/sidebar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
-    ExpenseFormComponent
+    DashboardComponent, 
+    ExpenseFormComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
   ],
   bootstrap: [AppComponent],
   providers: [

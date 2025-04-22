@@ -9,7 +9,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
-
+    
 
 class Currency(models.Model):
     code = models.CharField(max_length=3)  # USD, KZT, EUR

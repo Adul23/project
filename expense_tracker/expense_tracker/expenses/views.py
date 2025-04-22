@@ -84,7 +84,7 @@ class CurrencyListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
 
-@api_view(['GET', 'POST'])   
+@api_view(['GET', 'POST', 'DELETE'])   
 @permission_classes([IsAuthenticated]) 
 def listExpensesbyCategory(request, category_id):
     if request.method == 'GET':
@@ -98,3 +98,15 @@ def listExpensesbyCategory(request, category_id):
             expense = serializer.save()
             return Response(ExpenseSerializer(expense).data, status=201)
         return Response(serializer.errors, status=400)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteExpense(request, category_id, expense_id):
+    try:
+        expense = Expense.objects.get(id=expense_id, category_id=category_id, user=request.user)
+    except Expense.DoesNotExist:
+        return Response({'error': 'Expense not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    expense.delete()
+    return Response({'message': 'Expense deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+

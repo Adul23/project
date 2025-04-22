@@ -1,66 +1,73 @@
-<div *ngIf="error" style="color: red;">{{ error }}</div>
-<div *ngIf="success" style="color: green;">{{ success }}</div>
-<div>
+<section *ngIf="error" class="alert error">{{ error }}</section>
+<section *ngIf="success" class="alert success">{{ success }}</section>
+
+<main class="forms-container">
+  <!-- Add Expense Form -->
   <div class="form-box">
     <h2>Add New Expense</h2>
-  
     <form (ngSubmit)="onSubmit()">
-      <label>Amount</label>
+      <label for="amount">Amount</label>
       <input
+        id="amount"
         type="number"
         [(ngModel)]="amount"
         name="amount"
         placeholder="e.g., 3.50"
         required
       />
-  
-      <label>Expense Name</label>
+
+      <label for="description">Expense Name</label>
       <input
+        id="description"
         type="text"
         [(ngModel)]="description"
         name="description"
         placeholder="e.g., Coffee"
         required
       />
-  
-      <label>Category</label>
-      <select [(ngModel)]="category" name="category" required>
+
+      <label for="category">Category</label>
+      <select id="category" [(ngModel)]="category" name="category" required>
         <option *ngFor="let cat of categories" [value]="cat.id">
           {{ cat.name }}
         </option>
       </select>
-  
-      <label>Currency</label>
-      <select [(ngModel)]="currency" name="currency" required>
+
+      <label for="currency">Currency</label>
+      <select id="currency" [(ngModel)]="currency" name="currency" required>
         <option *ngFor="let cur of currencies" [value]="cur.id">
           {{ cur.code }} - {{ cur.name }}
         </option>
       </select>
-  
+
       <button class="create-btn" type="submit">Add Expense</button>
     </form>
   </div>
-  
-  <div>
-    <ul class="white">
+
+  <!-- Expenses List -->
+  <div class="form-box">
+    <h2>Expenses</h2>
+    <ul class="expense-list">
       <li *ngFor="let expense of expenses">
-        {{ expense.amount }} – {{ expense.description }}
-        
+        <span class="expense-item">
+          <strong>{{ expense.amount }}</strong> – {{ expense.description }}
+        </span>
+        <button class="delete-user" (click)="removeExpense(expense.id)">
+          Remove
+        </button>
       </li>
     </ul>
-  
-  
   </div>
-</div>
+</main>
 
-<div style="display: block;">
+<!-- Chart Section -->
+<section class="chart-section">
   <canvasjs-chart
-  [options]="chartOptions"
-  style="height: 300px; width: 100%;"
-></canvasjs-chart>
+    [options]="chartOptions"
+    style="height: 300px; width: 100%;"
+  ></canvasjs-chart>
 
-
-</div>
-<div>
-  <button style="width: 100px; height: 100px" (click)="generateChartData()">Refresh graph button</button>
-</div>
+  <button class="create-btn" style="margin-top: 20px;" (click)="generateChartData()">
+    Refresh Graph
+  </button>
+</section>
