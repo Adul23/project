@@ -10,6 +10,7 @@ import { ExpenseService } from '../../services/expense.service';
   standalone: false,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
   expenses: any[] = [];
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
   selected_category: any;
   chartOptions: any;
   constructor(
-    private categoryService: CategoryService, 
+    private categoryService: CategoryService,
     private router: Router,
     private authService: AuthService,
     private expenseService: ExpenseService
@@ -29,20 +30,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.authService.getUsername();
-    this.generateSampleChart();
-    this.categoryService.getCategories().subscribe({
-      next: (data: any) => {
-        this.categories = data;
-      },
-      error: (err: any) => {
-        console.error('Error fetching expenses:', err);
-      }
-    });
-  }
-  onLogout() {
-  localStorage.removeItem('access');
-  localStorage.removeItem('refresh');
-  this.router.navigate(['/login']);
+    this.loadCategories();
   }
 
   onCreate() {
@@ -52,13 +40,27 @@ export class DashboardComponent implements OnInit {
     this.categoryService.createCategory(data).subscribe({
       next: () => {
         this.success = 'Category created successfully!';
+        this.name = '';
+        this.loadCategories();
       },
       error: (err) => {
-        this.error = 'Failed to create expense.';
+        this.error = 'Failed to create category.';
         console.error(err);
       }
     });
   }
+
+  loadCategories() {
+    this.categoryService.getCategories().subscribe({
+      next: (data: any) => {
+        this.categories = data;
+      },
+      error: (err: any) => {
+        console.error('Error fetching categories:', err);
+      }
+    });
+  }
+
   selectCategory(categoryID: number){
     this.selected_category = categoryID;
   }
@@ -75,7 +77,7 @@ export class DashboardComponent implements OnInit {
       error: (err: any) => {
         console.error('Error fetching expenses:', err);
       }
-      
+
     });
     this.expenseService.getExpenses(this.selected_category).subscribe({
 
@@ -85,7 +87,7 @@ export class DashboardComponent implements OnInit {
       error: (err: any) => {
         console.error('Error fetching expenses:', err);
       }
-      
+
     });
     const categorySums: { [key: string]: number } = {};
           this.expenses.forEach(expense => {
@@ -115,7 +117,7 @@ export class DashboardComponent implements OnInit {
       }]
     };
   }
-  
+
 
   isSidebarCollapsed = input.required<boolean>();
   screenWidth = input.required<number>();

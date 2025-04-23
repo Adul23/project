@@ -1,76 +1,29 @@
-<!-- <h2>Dashboard</h2>
+<header>
+  <div class="logo">
+    <span class="white">Three Bogatyrs</span>
+  </div>
+</header>
 
-<div *ngIf="expenses.length === 0">No expenses yet.</div>
+<main>
+  <h1>Welcome back, <span class="username">{{ username }}</span></h1>
 
-<ul>
-  <li *ngFor="let expense of expenses">
-    {{ expense.amount }} – {{ expense.description }}
-  </li>
-</ul> -->
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HomeBudget</title>
-  <link rel="stylesheet" href="dashboard.component.css"/>
-</head>
-<body>
-  <header>
-    <div class="logo">
-      <img src="https://img.icons8.com/ios-filled/50/home.png" alt="Home Icon" />
-      <span class="white">Three Bogatyrs</span>
+  <div class="forms-container">
+    <div class="wrapper">
+      <h2>Create Budget</h2>
+      <label>Budget Name</label>
+      <input type="text" placeholder="e.g., Groceries" [(ngModel)]="name" name="name" />
+      <button class="create-btn" (click)="onCreate()">Create Budget</button>
     </div>
-    <div> 
-      <button (click)="onLogout()">Logout</button>
-    </div>
-  </header>
+  </div>
 
-  <main>
-    <h1>Welcome back, <span class="username">{{username}}</span></h1> <!--Change to username of the user-->
-    <div class="forms-container">
-      <div class="form-box">
-        <h2>Create Budget</h2>
-        <label>Budget Name</label>
-        <input type="number" placeholder="e.g., Groceries"  [(ngModel)]="name" name="name" required /><br /><br />
-
-        
-        <button class="create-btn" (click)="onCreate()">Create Budget</button>
+  <section class="existing-budgets">
+    <h2 class="white">Existing Budgets</h2>
+    <div class="budget-container">
+      <div class="budget-card" *ngFor="let category of categories">
+        <a routerLink="/add-expense" (click)="selectCategory(category.id)" [queryParams]="{ categoryId: category.id }">
+          <div><strong>{{ category.name }}</strong></div>
+        </a>
       </div>
-
-      
     </div>
-
-    
-    <section class="existing-budgets">
-      <ul>
-        <h2 class="white">Existing Budgets</h2>
-        <div class="budget-container" >
-          <div class="budget-card" *ngFor="let category of categories" >
-            
-            <a routerLink="/add-expense" (click)="selectCategory(category.id)" [queryParams]="{ categoryId: category.id }" > 
-              <div> <strong>{{category.name}}</strong></div>
-            </a>
-            
-            
-            <!-- <span>US$1,000.00 Budgeted</span> -->
-          </div>
-          
-        </div>
-      </ul> 
-
-
-      
-      
-    </section>
-   
-  </main>
-</body>
-</html>
-
-
-
-
-
+  </section>
+</main>

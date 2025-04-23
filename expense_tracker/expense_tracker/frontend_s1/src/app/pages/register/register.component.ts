@@ -10,44 +10,44 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent {
   username = '';
-  email = '';
   password = '';
   error = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onRegister() {
-    if (!this.username || !this.email || !this.password) {
-      this.error = 'All fields are required.';
+    this.error = '';
+
+    if (!this.username.trim() && !this.password.trim()) {
+      this.error = 'Username is required. Password is required.';
       return;
     }
 
-    if (!this.email.includes('@')) {
-      this.error = 'Invalid email format.';
+    if (!this.username.trim()) {
+      this.error = 'Username is required.';
+      return;
+    }
+
+    if (!this.password.trim()) {
+      this.error = 'Password is required.';
       return;
     }
 
     const data = {
       username: this.username,
-      email: this.email,
       password: this.password
     };
+
     this.authService.setUsername(this.username);
     this.authService.register(data).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => {
-        if (err.error?.email) {
-          this.error = err.error.email[0];
-        } else if (err.error?.username) {
-          this.error = err.error.username[0];
-        } else if (err.error?.password) {
-          this.error = err.error.password[0];
-        } else if (err.error?.detail) {
-          this.error = err.error.detail;
-        } else {
-          this.error = 'Registration failed.';
-        }
-        console.error('Full error:', err);
+        this.error =
+          err.error?.username?.[0] ||
+          err.error?.password?.[0] ||
+          err.error?.detail ||
+          'Registration failed.';
+        console.error('Registration error:', err);
       }
     });
   }

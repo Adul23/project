@@ -1,14 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-body {
-  background-color: #f0f4f8;
-  padding: 30px;
-  color: #333;
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 40px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 header {
@@ -24,134 +21,138 @@ header {
   gap: 10px;
   font-size: 24px;
   font-weight: bold;
-  color: #0d47a1;
+  color: #f48fb1;
 }
 
-.delete-user {
-  background-color: #ffebee;
-  border: 1px solid #ef9a9a;
-  color: #b71c1c;
-  padding: 10px 16px;
-  border-radius: 8px;
+.logo img {
+  height: 32px;
+}
+
+button {
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.delete-user:hover {
-  background-color: #ffcdd2;
-}
-
-main h1 {
-  font-size: 40px;
-  margin-bottom: 30px;
-  color: #0d47a1;
-}
-
-.username {
-  color: #00796b;
-  font-weight: 600;
-}
-
-.forms-container {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.form-box {
-  border: 1px solid #ddd;
-  padding: 25px;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 420px;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease;
 }
 
-.form-box:hover {
-  transform: translateY(-3px);
+button:hover {
+  transform: scale(1.04);
 }
 
-.form-box h2 {
-  margin-bottom: 15px;
-  color: #333;
+main h1 {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+}
+
+.username {
+  color: #4dd0e1;
+  font-weight: 600;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 460px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.3);
+}
+
+.wrapper h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ff66aa;
 }
 
 label {
-  display: block;
-  margin-top: 15px;
-  font-weight: 600;
-  color: #555;
+  font-size: 14px;
+  color: #ffffff;
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  transition: border 0.2s ease;
+input[type="text"] {
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #4c4c4c;
+  background: #1e1e2f;
+  color: white;
+  transition: border 0.3s;
 }
 
 input:focus {
-  border-color: #1976d2;
+  border-color: #ff6ec4;
   outline: none;
 }
 
 .create-btn {
-  margin-top: 20px;
-  background-color: #1976d2;
-  color: white;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  color: white;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease-in-out;
+  margin-top: 10px;
 }
 
 .create-btn:hover {
-  background-color: #1565c0;
-}
-
-.highlight {
-  color: #0d47a1;
-  font-weight: 600;
+  transform: scale(1.04);
 }
 
 .existing-budgets {
   margin-top: 50px;
 }
 
+.existing-budgets h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
 .budget-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
-  margin-top: 25px;
+  gap: 20px;
 }
 
 .budget-card {
-  border: 1px solid #ccc;
-  padding: 30px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  font-size: 18px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: center;
-  width: 350px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 20px;
+  width: 220px;
   text-align: center;
-  color: #333;
-  transition: transform 0.2s ease;
+  color: #ffffff;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  backdrop-filter: blur(12px);
 }
 
 .budget-card:hover {
-  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.white {
-  color: white;
+.budget-card a {
+  color: #ff6ec4;
+  text-decoration: none;
+}
+
+.budget-card a:hover {
+  color: #ff90f0;
 }

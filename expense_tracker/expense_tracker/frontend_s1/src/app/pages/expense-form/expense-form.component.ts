@@ -32,8 +32,8 @@ export class ExpenseFormComponent implements OnInit {
     private categoryService: CategoryService,
     private currencyService: CurrencyService,
     private router: Router,
-    private route: ActivatedRoute, 
-     
+    private route: ActivatedRoute,
+
   ) {}
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class ExpenseFormComponent implements OnInit {
     });
 
     this.currencyService.getCurrencies().subscribe({
-      next: (res) => this.currencies = res, 
+      next: (res) => this.currencies = res,
       error: (err) => console.error('Failed to load currencies:', err)
     });
     if (this.selectedCategory) {
@@ -79,8 +79,7 @@ export class ExpenseFormComponent implements OnInit {
 
     this.expenseService.createExpense(data).subscribe({
       next: () => {
-        this.success = 'Expense created successfully!';
-        this.router.navigate(['/dashboard']);
+        this.loadExpenses();
       },
       error: (err) => {
         this.error = 'Failed to create expense.';
@@ -88,8 +87,19 @@ export class ExpenseFormComponent implements OnInit {
       }
     });
   }
-  
-  
+  loadExpenses() {
+    this.expenseService.getExpenses(this.selectedCategory).subscribe({
+      next: (res) => {
+        this.expenses = res;
+        this.generateChartData();
+      },
+      error: (err) => console.error('Failed to load expenses:', err)
+    });
+  }
+
+
+
+
 	generateChartData() {
     const totalAmount = this.expenses.reduce((sum: number, expense: any) => {
       return sum + parseFloat(expense.amount);
@@ -97,7 +107,7 @@ export class ExpenseFormComponent implements OnInit {
     const dps = this.expenses.map((expense: any) => ({
       x: new Date(expense.date),
       y: parseFloat(expense.amount)
-      
+
     }));
     this.chartOptions = {
       zoomEnabled: true,
@@ -120,7 +130,7 @@ export class ExpenseFormComponent implements OnInit {
     };
   }
   removeExpense(index: number): void {
-  
+
     this.expenseService.deleteExpense(index, this.selectedCategory).subscribe(() => {
       this.expenses = this.expenses.filter(exp => exp.id !== index);
       console.log(this.expenses);

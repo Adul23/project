@@ -6,7 +6,7 @@
   background-size: cover;
 }
 
-.login-wrapper {
+.wrapper {
   width: 460px;
   padding: 50px 40px;
   display: flex;
@@ -45,11 +45,10 @@ form {
 
 label {
   font-size: 14px;
-  color: #ccc;
+  color: #ffffff;
 }
 
 input[type="text"],
-input[type="email"],
 input[type="password"] {
   padding: 15px;
   font-size: 16px;
@@ -82,14 +81,14 @@ button:hover {
   transform: scale(1.04);
 }
 
-.register-link {
+.login-link {
   margin-top: 10px;
   font-size: 20px;
-  color: #ccc;
+  color: #ffffff;
   text-align: center;
 }
 
-.register-link a {
+.login-link a {
   color: #ff6ec4;
   font-weight: bold;
   text-decoration: none;
@@ -97,8 +96,8 @@ button:hover {
   transition: color 0.2s;
 }
 
-.register-link a:hover {
-  color: #ff99ee;
+.login-link a:hover {
+  color: #ff90f0;
 }
 
 .error {

@@ -18,14 +18,15 @@ export class AuthService {
     })
   );
 }
-  register(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register/`, data).pipe(
-      tap((res: any) => {
-        localStorage.setItem('access_token', res.access);
-        localStorage.setItem('refresh_token', res.refresh);
-      })
-    );
-  }
+  register(data: { username: string; password: string }): Observable<any> {
+  return this.http.post(`${this.baseUrl}/register/`, data).pipe(
+    tap((res: any) => {
+      localStorage.setItem('access_token', res.access);
+      localStorage.setItem('refresh_token', res.refresh);
+    })
+  );
+}
+
 
   logout() {
     localStorage.removeItem('access');
@@ -46,9 +47,10 @@ export class AuthService {
 
   setUsername(username: string) {
     this.username = username;
+    localStorage.setItem('username', username); // 💾 сохраняем
   }
 
   getUsername(): string {
-    return this.username;
+    return this.username || localStorage.getItem('username') || '';
   }
 }

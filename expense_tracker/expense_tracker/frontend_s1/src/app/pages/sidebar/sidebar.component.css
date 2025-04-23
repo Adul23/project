@@ -1,159 +1,109 @@
-.sidebar {
-    height: 100vh;
-    width: 220px;
-    background-color: #ffffff;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    font-family: 'Segoe UI', sans-serif;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
-  }
-  
-  .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-  
-  .user-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    border: 2px solid #1976d2;
-  }
-  
-  .nav-menu ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .nav-menu li {
-    margin: 20px 0;
-  }
-  
-  .nav-menu a {
-    color: #0d47a1;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
-  }
-  
-  .nav-menu a:hover,
-  .nav-menu .active {
-    color: #1565c0;
-  }
-  
-  .sidenav {
-    background: #f0f4f8;
-    transition: all 0.5s ease;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    width: 16.5625rem;
-    height: 100vh;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  .sidenav-collapsed {
-    width: 5rem;
-  }
-  
-  .sidenav .logo-container {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    width: 100%;
-  }
-  
-  .sidenav .logo-container .logo {
-    background: #1976d2;
-    color: #fff;
-    text-align: center;
-    width: 3rem;
-    min-width: 3rem;
-    border-radius: 0.5rem;
-    padding: 0.3rem;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-  }
-  
-  .sidenav .logo-container .logo-text {
-    margin-left: 1rem;
-    font-size: 20px;
-    font-weight: bold;
-    color: #0d47a1;
-  }
-  
-  .sidenav .logo-container .btn-close {
-    margin-left: auto;
-    cursor: pointer;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    background-color: transparent;
-    border: none;
-  }
-  
-  .sidenav .logo-container .btn-close .fa-times {
-    color: #333;
-    font-size: 20px;
-  }
-  
-  .sidenav-nav {
-    list-style: none;
-    padding: 1rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: calc(100% - 3.65rem);
-    cursor: pointer;
-  }
-  
-  .sidenav-nav .sidenav-nav-item {
-    width: 100%;
-    margin-bottom: 0.625rem;
-  }
-  
-  .sidenav-nav .sidenav-nav-item .sidenav-nav-link {
-    display: flex;
-    align-items: center;
-    height: 3rem;
-    color: #0d47a1;
-    text-decoration: none;
-    border-radius: 0.625rem;
-    transition: all 0.3s ease;
-    padding: 0 12px;
-  }
-  
-  .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-icon {
-    font-size: 22px;
-    width: 2rem;
-    min-width: 2rem;
-    text-align: center;
-    padding: 12px;
-  }
-  
-  .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-text {
-    margin-left: 1.5rem;
-  }
-  
-  .sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
-    background-color: #e3f2fd;
-    color: #1565c0;
-  }
-  
-  .active {
-    background-color: #e3f2fd;
-  }
-  
-  .active .sidenav-link-icon,
-  .active .sidenav-link-text {
-    color: #1565c0;
-  }
-  
+.sidenav {
+  height: 100vh;
+  width: 150px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.sidenav-collapsed {
+  width: 77px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  padding: 0 10px;
+}
+
+.logo {
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logo:hover {
+  background: linear-gradient(45deg, #f093fb, #f5576c);
+}
+
+.logo-text {
+  margin-left: 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6ec4;
+}
+
+.sidenav-nav {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 14px;
+}
+
+.sidenav-nav-item {
+  list-style: none;
+  width: 100%;
+}
+
+.sidenav-nav-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 48px;
+  padding: 0 12px;
+  color: #cccccc;
+  border-radius: 10px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidenav-nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ff6ec4;
+}
+
+.sidenav-link-icon {
+  font-size: 18px;
+  width: 2rem;
+  text-align: center;
+  color: inherit;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ff90f0;
+}
+
+.active .sidenav-link-icon,
+.active span {
+  color: #ff90f0;
+}
+
+.sidebar-user {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 16px;
+  color: #ff6ec4;
+  font-weight: bold;
+}

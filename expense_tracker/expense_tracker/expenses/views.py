@@ -4,12 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from rest_framework_simplejwt.views import TokenObtainPairView
-from .models import (
-    Category,
-    Expense,
-    Currency
-)
+from django.shortcuts import get_object_or_404
+
+from .models import Category, Expense, Currency
 from .serializers import (
     UserLoginSerializer,
     UserRegisterSerializer,
@@ -17,7 +14,6 @@ from .serializers import (
     CategorySerializer,
     CurrencySerializer
 )
-
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -46,7 +42,7 @@ def login_user(request):
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
-            })
+            }, status=status.HTTP_200_OK)
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -68,36 +64,36 @@ class ExpenseDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         return Expense.objects.filter(user=self.request.user)
 
 class CategoryListCreateView(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-
-
 class CurrencyListCreateView(generics.ListCreateAPIView):
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def listExpensesByCategory(request, category_id):
+    category = get_object_or_404(Category, id=category_id, user=request.user)
 
-@api_view(['GET', 'POST', 'DELETE'])   
-@permission_classes([IsAuthenticated]) 
-def listExpensesbyCategory(request, category_id):
     if request.method == 'GET':
-        expenses = Expense.objects.filter(category=category_id)
+        expenses = Expense.objects.filter(category=category, user=request.user)
         serializer = ExpenseSerializer(expenses, many=True)
-        return Response(serializer.data) 
+        return Response(serializer.data)
+
     if request.method == 'POST':
-        expenses = Expense.objects.all()
         serializer = ExpenseSerializer(data=request.data)
         if serializer.is_valid():
-            expense = serializer.save()
-            return Response(ExpenseSerializer(expense).data, status=201)
-        return Response(serializer.errors, status=400)
+            expense = serializer.save(user=request.user)
+            return Response(ExpenseSerializer(expense).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
@@ -109,4 +105,3 @@ def deleteExpense(request, category_id, expense_id):
 
     expense.delete()
     return Response({'message': 'Expense deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-
