@@ -5,6 +5,7 @@ from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
+from rest_framework.generics import DestroyAPIView
 
 from .models import Category, Expense, Currency
 from .serializers import (
@@ -105,3 +106,11 @@ def deleteExpense(request, category_id, expense_id):
 
     expense.delete()
     return Response({'message': 'Expense deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+class CategoryDeleteView(DestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)

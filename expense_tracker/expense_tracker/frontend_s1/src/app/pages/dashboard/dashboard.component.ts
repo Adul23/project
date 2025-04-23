@@ -60,6 +60,14 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  deleteCategory(categoryId: number) {
+    this.categoryService.deleteCategory(categoryId).subscribe({
+      next: () => {
+        this.categories = this.categories.filter(cat => cat.id !== categoryId);
+      },
+      error: (err) => console.error('Failed to delete category:', err)
+    });
+  }
 
   selectCategory(categoryID: number){
     this.selected_category = categoryID;

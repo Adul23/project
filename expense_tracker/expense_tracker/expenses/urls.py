@@ -7,7 +7,7 @@ from .views import (
     CategoryListCreateView,
     CurrencyListCreateView,
     listExpensesByCategory,
-    deleteExpense,
+    deleteExpense, CategoryDeleteView,
 )
 
 urlpatterns = [
@@ -19,5 +19,7 @@ urlpatterns = [
     path('currencies/', CurrencyListCreateView.as_view(), name='currency-list-create'),
     path('categories/<int:category_id>/expenses/', listExpensesByCategory, name='budget-expenses'),
     path('categories/<int:category_id>/expenses/<int:expense_id>', deleteExpense, name='delete-expenses'),
+    path('categories/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
+
 
 ]

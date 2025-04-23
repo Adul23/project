@@ -23,6 +23,8 @@
         <a routerLink="/add-expense" (click)="selectCategory(category.id)" [queryParams]="{ categoryId: category.id }">
           <div><strong>{{ category.name }}</strong></div>
         </a>
+        <button (click)="deleteCategory(category.id)" class="delete-btn">x
+        </button>
       </div>
     </div>
   </section>

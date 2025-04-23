@@ -60,7 +60,7 @@
       <ul class="expense-list">
         <li *ngFor="let expense of expenses" style="margin-bottom: 12px;">
           <span class="expense-item">
-            <strong>{{ expense.amount }} {{ expense.currency.code }}</strong> – {{ expense.description }}
+            <strong>{{ expense.amount }}</strong> – {{ expense.description }}
           </span>
           <button class="delete-user" (click)="removeExpense(expense.id)">
             Remove

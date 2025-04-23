@@ -23,7 +23,7 @@ class Currency(models.Model):
 
 class Expense(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True)
     date = models.DateField(auto_now_add=True)

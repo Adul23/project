@@ -54,7 +54,10 @@ export class ExpenseFormComponent implements OnInit {
     });
 
     this.currencyService.getCurrencies().subscribe({
-      next: (res) => this.currencies = res,
+      next: (res) => {
+        this.currencies = res;
+        console.log(this.currencies);
+      },
       error: (err) => console.error('Failed to load currencies:', err)
     });
     if (this.selectedCategory) {
@@ -62,7 +65,6 @@ export class ExpenseFormComponent implements OnInit {
         next: (res) => {
           this.expenses = res;
           console.log(this.expenses);
-          this.generateChartData();
         },
         error: (err) => console.error('Failed to load expenses:', err)
       });
@@ -91,43 +93,9 @@ export class ExpenseFormComponent implements OnInit {
     this.expenseService.getExpenses(this.selectedCategory).subscribe({
       next: (res) => {
         this.expenses = res;
-        this.generateChartData();
       },
       error: (err) => console.error('Failed to load expenses:', err)
     });
-  }
-
-
-
-
-	generateChartData() {
-    const totalAmount = this.expenses.reduce((sum: number, expense: any) => {
-      return sum + parseFloat(expense.amount);
-    }, 0);
-    const dps = this.expenses.map((expense: any) => ({
-      x: new Date(expense.date),
-      y: parseFloat(expense.amount)
-
-    }));
-    this.chartOptions = {
-      zoomEnabled: true,
-      exportEnabled: true,
-      theme: "light2",
-      title: {
-        text: "Expenses Over Time"
-      },
-      axisX: {
-        title: "Date",
-        valueFormatString: "DD MMM YYYY"
-      },
-      axisY: {
-        title: "Amount " + totalAmount
-      },
-      data: [{
-        type: "line",
-        dataPoints: dps
-      }]
-    };
   }
   removeExpense(index: number): void {
 
@@ -139,10 +107,8 @@ export class ExpenseFormComponent implements OnInit {
         next: (res) => {
           this.expenses = res;
           console.log(this.expenses);
-          this.generateChartData();
         },
         error: (err) => console.error('Failed to load expenses:', err)
       });
-    this.generateChartData();
   }
 }
